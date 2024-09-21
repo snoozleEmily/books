@@ -1,17 +1,17 @@
 -- This library management system allows members to borrow and return books. 
 -- It consists of three main tables: 
--- 1. **Books**: Stores information about each book, including its title, author, and availability status.
--- 2. **Members**: Contains details about library members, such as their names and join dates.
--- 3. **BorrowRecords**: Tracks borrowing activities, linking books to members with dates for when the books were borrowed and returned.
+-- 1. Books: Stores information about each book, including its title, author, and availability status.
+-- 2. Members: Contains details about library members, such as their names and join dates.
+-- 3. BorrowRecords: Tracks borrowing activities, linking books to members with dates for when the books were borrowed and returned.
 
 -- Usage (see the end of the code):
--- - To borrow a book, call the `BorrowBook` procedure with the desired book ID and member ID. 
+-- * To borrow a book, call the `BorrowBook` procedure with the desired book ID and member ID. 
 --   If the book is available, a new record is created in `BorrowRecords`, and the book's status is updated to unavailable.
--- - To return a book, use the `ReturnBook` procedure with the book ID and member ID. 
+-- * To return a book, use the `ReturnBook` procedure with the book ID and member ID. 
 --   This updates the return date in `BorrowRecords` and marks the book as available again.
--- - A trigger logs each borrowing event, providing feedback on which member borrowed which book.
+-- * A trigger logs each borrowing event, providing feedback on which member borrowed which book.
 
-
+--PLSQL
 -- Table for storing book information
 CREATE TABLE Books (
     book_id NUMBER PRIMARY KEY,
