@@ -8,7 +8,7 @@ CREATE TABLE chakra_natures (
 );
 
 -- Insert data into the Chakra Natures table
-INSERT INTO chakra_natures (element, pronunciation, kanji) VALUES
+INSERT INTO chakra_natures (id, element, pronunciation, kanji) VALUES
 (1, 'fire', 'katon', '火'), -- ID: 1
 (2, 'water', 'suiton', '水'), -- ID: 2
 (3, 'air', 'fūton', '風'), -- ID: 3
