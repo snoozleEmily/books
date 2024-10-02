@@ -1,31 +1,27 @@
 CREATE OR REPLACE FUNCTION power(base NUMBER, exponent NUMBER) RETURN NUMBER IS
+  result INTEGER := 1;
 BEGIN
-    result := 1; -- Initialize the result to 1
     FOR i IN 1..exponent LOOP
         result := result * base; -- Multiply the base by itself
     END LOOP;
 END;
 /
 
-DECLARE 
-  square_result NUMBER;
-  is_prime BOOLEAN;
-
-  CREATE OR REPALCE FUNCTION is_prime_check(number NUMBER) RETURN BOOLEAN is_prime
-    i NUMBER;
-  BEGIN
-    IF number < 2 THEN
-      RETURN FALSE;
-    END IF;
-    FOR i IN 2..FLOOR(SQRT(number)) LOOP
-      IF number MOD i = 0 THEN
+CREATE OR REPLACE FUNCTION is_prime_check(p_number IN INTEGER) RETURN BOOLEAN IS
+    i INTEGER;
+BEGIN
+    IF p_number < 2 THEN
         RETURN FALSE;
-      END IF;
+    END IF;
+    FOR i IN 2..FLOOR(SQRT(p_number)) LOOP
+        IF p_number MOD i = 0 THEN
+            RETURN FALSE;
+        END IF;
     END LOOP;
     RETURN TRUE;
-  END;
+END;
+/
 
-  FUNCTION
 
 
 DECLARE
