@@ -1,5 +1,5 @@
 CREATE OR REPLACE FUNCTION power(base NUMBER, exponent NUMBER) RETURN NUMBER IS
-  result INTEGER := 1;
+  result NUMBER := 1;
 BEGIN
     FOR i IN 1..exponent LOOP
         result := result * base; -- Multiply the base by itself
