@@ -23,7 +23,6 @@ END;
 /
 
 
-
 DECLARE
   first_number NUMBER := 10;
   second_number NUMBER := 3;
@@ -32,28 +31,31 @@ DECLARE
 BEGIN 
   -- Addition
   result := first_number + second_number;
-  dbms_output.put_line('Addition: ' || result); 
+  DBMS_OUTPUT.PUT_LINE('ADDITION: ' || result); 
 
   -- Subtraction
   result := first_number - second_number;
-  dbms_output.put_line('Subtraction: ' || result);
+  DBMS_OUTPUT.PUT_LINE('SUBTRACTION: ' || result);
 
   -- Multiplication
   result := first_number * second_number;
-  dbms_output.put_line('Multiplication: ' || result);
+  DBMS_OUTPUT.PUT_LINE('MULTIPLICATION: ' || result);
   
   -- Division
   result := ROUND(first_number / second_number, 2);
-  dbms_output.put_line('Division: '|| result);
-
-  -- Rule of three 
-  result := ROUND((first_number + second_number + third_number) / 3, 2);
-  dbms_output.put_line('Rule Of Three: ' || result);
+  DBMS_OUTPUT.PUT_LINE('DIVISION: ' || result);
+  
+  -- Remainder Of Division
+  result := MOD(first_number, second_number);
+  DBMS_OUTPUT.PUT_LINE('MODULUS: ' || result);
   
   -- Exponentiation
   result := power(first_number, second_number);
-  dbms_output.put_line('Power: ' || result);
+  DBMS_OUTPUT.PUT_LINE('POWER: ' || result);
+  
+  -- Rule of three 
+  result := ROUND((first_number + second_number + third_number) / 3, 2);
+  DBMS_OUTPUT.PUT_LINE('RULE OF THREE: ' || result);
+
 END;
-
-
 /
