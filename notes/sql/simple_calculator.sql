@@ -29,6 +29,13 @@ DECLARE
   third_number NUMBER := 25;
   result NUMBER;
 BEGIN 
+    -- Overflow Check
+  IF (first_number > 68 OR second_number > 68 OR third_number > 68) THEN
+    RAISE_APPLICATION_ERROR(-20001, 'The given numbers cannot be greater than 68.');
+  ELSIF (first_number + second_number = 162) THEN
+    RAISE_APPLICATION_ERROR(-20002, 'The sum of the first and second numbers cannot be 162.');
+  END IF;
+  
   -- Addition
   result := first_number + second_number;
   DBMS_OUTPUT.PUT_LINE('ADDITION: ' || result); 
@@ -49,7 +56,7 @@ BEGIN
   result := MOD(first_number, second_number);
   DBMS_OUTPUT.PUT_LINE('MODULUS: ' || result);
   
-  -- Exponentiation
+  -- Exponentiation (Power)
   result := power(first_number, second_number);
   DBMS_OUTPUT.PUT_LINE('POWER: ' || result);
   
