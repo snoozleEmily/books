@@ -22,7 +22,6 @@ BEGIN
 END;
 /
 
-
 DECLARE
   first_number NUMBER := 10;
   second_number NUMBER := 3;
