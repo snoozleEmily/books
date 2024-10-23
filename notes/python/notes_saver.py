@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox, font
+from tkinter import messagebox, font, filedialog
+from fpdf import FPDF
 
 
 class TextInputApp:
@@ -46,7 +47,7 @@ class TextInputApp:
             "<Button-1>", self.select_note
         )  # Bind a click event to select notes
 
-        # Frame for delete buttons
+        # Frame for delete and save buttons
         self.delete_frame = tk.Frame(master, bg="light blue")
         self.delete_frame.pack(pady=5)
 
@@ -65,6 +66,14 @@ class TextInputApp:
             command=self.show_delete_all_confirmation,
         )
         self.delete_all_button.pack(side=tk.LEFT, padx=5)
+
+        # Save button
+        self.save_button = tk.Button(
+            self.delete_frame,
+            text="Save Notes",
+            command=self.save_notes,
+        )
+        self.save_button.pack(side=tk.LEFT, padx=5)
 
         # Dark mode text label
         self.dark_mode_label = tk.Label(
@@ -217,6 +226,50 @@ class TextInputApp:
         self.dark_mode_label.config(bg="gray15", fg="white")
         self.dark_mode_checkbox.config(bg="gray15", fg="white")
         self.is_dark_mode = True
+
+    def save_notes(self):
+        if not self.inputs:
+            messagebox.showinfo("No Notes", "There are no notes to save.")
+            return
+
+        # Ask the user to select a file type (.txt or .pdf)
+        file_path = filedialog.asksaveasfilename(
+            defaultextension=".txt",
+            filetypes=[
+                ("Save as a TEXT file", "*.txt"),
+                ("Save as a PDF file", "*.pdf"),
+            ],
+            title="Save Notes As",
+            initialfile="myNotes",
+        )
+
+        # Check if the user canceled the file dialog
+        if not file_path:
+            return
+
+        # Determine file extension and call the appropriate save method
+        if file_path.endswith(".txt"):
+            self.save_as_txt(file_path)
+        elif file_path.endswith(".pdf"):
+            self.save_as_pdf(file_path)
+
+    def save_as_txt(self, file_path):
+        # Save notes as a .txt file
+        with open(file_path, "w") as file:
+            for id, note in self.inputs.items():
+                file.write(f"Note {id}: {note}\n")
+        messagebox.showinfo("Saved", "Notes have been saved as a .txt file.")
+
+    def save_as_pdf(self, file_path):
+        # Save notes as a .pdf file
+        pdf = FPDF()
+        pdf.set_auto_page_break(auto=True, margin=15)
+        pdf.add_page()
+        pdf.set_font("Arial", size=12)
+        for id, note in self.inputs.items():
+            pdf.cell(200, 10, txt=f"Note {id}: {note}", ln=True)
+        pdf.output(file_path)
+        messagebox.showinfo("Saved", "Notes have been saved as a .pdf file.")
 
 
 if __name__ == "__main__":
